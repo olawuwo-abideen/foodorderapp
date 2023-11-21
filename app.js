@@ -1,6 +1,4 @@
 require('dotenv').config();
-const mongoose = require('mongoose');
-
 
 //Express
 const express = require('express');
@@ -8,9 +6,6 @@ const app = express();
 
 //Database
 const connectDB = require('./database/connect');
-
-
-
 
 app.get('/', (req, res) => {
     res.send('<h1>Welcome to God Plan Food </h1>');
