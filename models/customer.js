@@ -14,20 +14,19 @@ const customerSchema = new mongoose.Schema(
           minlength: 6,
         },
         firstName: {
-          type: Number,
+          type: String,
           required: true,
           maxlength: 30,
-          unique: true,
         },
         lastName: {
             type: String,
             required: true,
-            maxlength: 50,
+            maxlength: 30,
           },
         address: {
             type: String,
             required: true,
-            maxlength: 50,
+            maxlength: 30,
           },
         phoneNumber: {
             type: Number,

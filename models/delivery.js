@@ -6,7 +6,7 @@ const deliverySchema = new mongoose.Schema(
         email: {
           type: String,
           required: true,
-          maxlength: 50,
+          unique : true
         },
         password: {
           type: String,
@@ -35,6 +35,10 @@ const deliverySchema = new mongoose.Schema(
             maxlength: 100,
           },
         isAvailable: {
+            type: Boolean,
+            required: true,
+          },
+        verified: {
             type: Boolean,
             required: true,
           },
