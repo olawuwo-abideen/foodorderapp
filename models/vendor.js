@@ -25,7 +25,7 @@ const vendorSchema = new mongoose.Schema(
         phone: {
             type: String,
             required: true,
-            maxlength: 50,
+            maxlength: 11,
             unique: true,
           },
         email: {
@@ -33,6 +33,10 @@ const vendorSchema = new mongoose.Schema(
             required: true,
             maxlength: 100,
             unique: true,
+            match: [
+              /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+              'Please provide a valid email',
+            ],
           },
         password: {
             type: Number,

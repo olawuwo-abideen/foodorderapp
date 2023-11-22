@@ -6,7 +6,12 @@ const customerSchema = new mongoose.Schema(
         email: {
           type: String,
           required: true,
-          unique: true
+          unique: true,
+          match: [
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+            'Please provide a valid email',
+          ],
+
         },
         password: {
           type: String,
@@ -16,12 +21,12 @@ const customerSchema = new mongoose.Schema(
         firstName: {
           type: String,
           required: true,
-          maxlength: 30,
+          maxlength: 20,
         },
         lastName: {
             type: String,
             required: true,
-            maxlength: 30,
+            maxlength: 20,
           },
         address: {
             type: String,
@@ -31,12 +36,12 @@ const customerSchema = new mongoose.Schema(
         phoneNumber: {
             type: Number,
             required: true,
-            maxlength: 100,
+            maxlength: 11,
           },
         verified: {
             type: Boolean,
+            default :false,
             required: true,
-            maxlength: 100,
           },
           cart: [
             {
