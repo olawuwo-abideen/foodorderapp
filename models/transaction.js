@@ -38,7 +38,8 @@ const transactionSchema = new mongoose.Schema(
         paymentResponse: {
             type: Number,
             required: true,
-          }
+          },
+          timestamps: true
       },
 )
 

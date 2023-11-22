@@ -51,6 +51,7 @@ const vendorSchema = new mongoose.Schema(
             type: mongoose.SchemaTypes.ObjectId,
             ref: 'food'
         }],
+        timestamps: true
       },
 )
 

@@ -43,7 +43,8 @@ const offerSchema = new mongoose.Schema(
         readyTime: {
             type: Number,
             required: true,
-          }
+          },
+        timestamps: true
       },
 )
 
