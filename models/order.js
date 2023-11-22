@@ -32,7 +32,6 @@ const foodSchema = new mongoose.Schema(
         readyTime: {
             type: Number,
             required: true,
-            maxlength: 100,
           },
         price: {
             type: Number,

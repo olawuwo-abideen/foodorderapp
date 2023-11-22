@@ -16,8 +16,6 @@ const vendorSchema = new mongoose.Schema(
         foodType: {
           type: Number,
           required: true,
-          maxlength: 30,
-          unique: true,
         },
         address: {
             type: String,
@@ -28,11 +26,13 @@ const vendorSchema = new mongoose.Schema(
             type: String,
             required: true,
             maxlength: 50,
+            unique: true,
           },
         email: {
             type: Number,
             required: true,
             maxlength: 100,
+            unique: true,
           },
         password: {
             type: Number,
