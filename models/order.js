@@ -41,7 +41,7 @@ const foodSchema = new mongoose.Schema(
             required: true,
           },
         deliveryId: {
-            type: Number,
+            type: String,
             required: true,
           },
         readyTime: {
