@@ -28,7 +28,7 @@ const offerSchema = new mongoose.Schema(
             required: true,
             maxlength: 50,
           },
-          orderStatus: {
+        orderStatus: {
             type: String,
             required: true,
           },

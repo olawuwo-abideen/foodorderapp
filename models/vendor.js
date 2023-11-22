@@ -37,6 +37,7 @@ const vendorSchema = new mongoose.Schema(
         password: {
             type: Number,
             required: true,
+            minlength: 6,
           },
         serviceAvailable: {
             type: Number,

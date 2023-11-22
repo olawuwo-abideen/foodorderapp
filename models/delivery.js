@@ -11,7 +11,7 @@ const deliverySchema = new mongoose.Schema(
         password: {
           type: String,
           required: true,
-          maxlength: 50,
+          minlength: 6,
         },
         firstName: {
           type: Number,
