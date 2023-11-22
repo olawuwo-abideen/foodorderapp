@@ -13,31 +13,38 @@ const foodSchema = new mongoose.Schema(
           required: true,
           maxlength: 50,
         },
-        description: {
+        items: [
+          {
+              food: {type: Schema.Types.ObjectId, ref: "food", require: true},
+              unit: { type: Number, require: true}
+          }
+      ],
+        totalAmount: {
           type: Number,
           required: true,
-          maxlength: 30,
-          unique: true,
         },
-        category: {
+        paidAmount: {
+          type: Number,
+          required: true,
+        },
+        orderDate: {
+            type: Date,
+            required: true,
+          },
+        orderStatus: {
             type: String,
             required: true,
             maxlength: 50,
           },
-        foodType: {
+        remarks: {
             type: String,
             required: true,
-            maxlength: 50,
+          },
+        deliveryId: {
+            type: Number,
+            required: true,
           },
         readyTime: {
-            type: Number,
-            required: true,
-          },
-        price: {
-            type: Number,
-            required: true,
-          },
-        rating: {
             type: Number,
             required: true,
           },

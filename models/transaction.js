@@ -15,28 +15,27 @@ const transactionSchema = new mongoose.Schema(
           maxlength: 50,
         },
         orderId: {
-          type: Number,
+          type: String,
           required: true,
         },
         orderValue: {
+            type: Number,
+            required: true,
+          },
+        offerUsed: {
             type: String,
             required: true,
-            maxlength: 50,
           },
         status: {
             type: String,
             required: true,
-            maxlength: 50,
-            unique: true,
           },
         paymentMode: {
-            type: Number,
+            type: String,
             required: true,
-            maxlength: 100,
-            unique: true,
           },
         paymentResponse: {
-            type: Number,
+            type: String,
             required: true,
           },
           timestamps: true
