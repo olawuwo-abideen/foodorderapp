@@ -38,7 +38,6 @@ const customerSchema = new mongoose.Schema(
             required: true,
             maxlength: 100,
           },
-          timestamps: true,
           cart: [
             {
                 food: { type: Schema.Types.ObjectId, ref: 'food', require: true},
@@ -48,7 +47,9 @@ const customerSchema = new mongoose.Schema(
         orders: [{
             type: Schema.Types.ObjectId,
             ref: 'order'
-        }]
+        }],
+        
+        timestamps: true
         
       },
 )
