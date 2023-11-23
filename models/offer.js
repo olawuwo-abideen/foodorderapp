@@ -1,47 +1,37 @@
 const mongoose = require('mongoose');
 
 
+
 const offerSchema = new mongoose.Schema(
     {
-        orderId: {
+        offerType: {
           type: String,
           required: true,
-          maxlength: 50,
+       
         },
-        vendorId: {
+        vendors: [
+          {type: Schema.Types.ObjectId, ref: 'vendor'}
+      ],
+        
+        title: {
           type: String,
           required: true,
-          maxlength: 50,
         },
-        items: [
-            {
-                food: {type: Schema.Types.ObjectId, ref: "food", require: true},
-                unit: { type: Number, require: true}
-            }
-        ],
-        paidAmount: {
-          type: Number,
-          required: true,
-        },
-        orderDate: {
+        description: {
             type: String,
             required: true,
-            maxlength: 50,
+          
           },
-        orderStatus: {
-            type: String,
-            required: true,
-          },
-          remarks: {
-            type: String,
-            required: true,
-          },
-        deliveryId: {
-            type: String,
-            required: true,
-          },
-        readyTime: {
+        minValue: {
             type: Number,
+            required: true,
+          },
+          offerAmount: {
+            type: Number,
+            required: true,
+          },
+        isActive: {
+            type: Boolean,
             required: true,
           },
         timestamps: true
