@@ -2,7 +2,17 @@ const express = require('express');
 const router = express.Router();
 
 
-const { createVendor, getDeliveryUsers, getTransactionById, getTransactions, getVendorByID, getVendors, verifyDeliveryUser } = require('../controllers/admin');
+const {
+    
+    createVendor,
+    getSingleVendor,
+    getAllVendors,
+    getAllTransactions,
+    getSingleTransaction,
+    verifyDeliveryUser,
+    getDeliveryUsers 
+
+    } = require('../controllers/admin');
 
 
 
@@ -10,12 +20,12 @@ const { createVendor, getDeliveryUsers, getTransactionById, getTransactions, get
 
 router.post('/vendor', createVendor)
 
-router.get('/vendors', getVendors)
-router.get('/vendor/:id', getVendorByID)
+router.get('/vendors', getAllVendors)
+router.get('/vendor/:id', getSingleVendor)
 
 
-router.get('/transactions', getTransactions)
-router.get('/transaction/:id', getTransactionById)
+router.get('/transactions', getAllTransactions)
+router.get('/transaction/:id', getSingleTransaction)
 
 router.put('/delivery/verify', verifyDeliveryUser)
 router.get('/delivery/users', getDeliveryUsers);
