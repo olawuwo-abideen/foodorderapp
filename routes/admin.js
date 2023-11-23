@@ -16,8 +16,6 @@ const {
 
 
 
-
-
 router.post('/vendor', createVendor)
 
 router.get('/vendors', getAllVendors)
@@ -28,4 +26,4 @@ router.get('/transactions', getAllTransactions)
 router.get('/transaction/:id', getSingleTransaction)
 
 router.put('/delivery/verify', verifyDeliveryUser)
-router.get('/delivery/users', getDeliveryUsers);
+router.get('/delivery/users', getDeliveryUsers)
