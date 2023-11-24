@@ -9,8 +9,8 @@ const CustomError = require('../errors');
 const createVendor = async (req, res) => {
 
   req.body.user = req.user.userId;
-  const vendor = await Vendor.create(req.body);
-  res.status(StatusCodes.CREATED).json({ vendor });
+  const createvendor = await Vendor.create(req.body);
+  res.status(StatusCodes.CREATED).json({ createvendor });
     
   };
 
