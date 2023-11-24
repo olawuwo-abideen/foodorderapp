@@ -26,11 +26,15 @@ const createVendor = async (req, res) => {
 
 
 const getAllVendors = async (req, res) => {
-    
+  const vendors = await Vendor.find({})
+  res.status(StatusCodes.OK).json({vendors}) 
   };
 
 
   const  getAllTransactions = async (req, res) => {
+
+    const transactions = await Transaction.find({})
+    res.status(StatusCodes.OK).json({transactions}) 
     
   };
 
@@ -38,6 +42,13 @@ const getAllVendors = async (req, res) => {
 
 
   const  getSingleTransaction = async (req, res) => {
+
+    const {id:transactionId} = req.params
+    const transaction = await Transaction.findOne({_id:transactionId});
+    if(!transaction){
+        throw new CustomError.NotFoundError(`No transaction with id : ${transactionId}`);
+      }
+  res.status(StatusCodes.OK).json({transaction}) 
     
   };
 
