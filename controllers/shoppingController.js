@@ -12,7 +12,7 @@ const  getAvailableFood = async (req, res) => {
     if(food.length > 0){
          return res.status(StatusCodes.OK).json({food})
     }
-    return res.status(StatusCodes.NOT_FOUND).json({ msg: 'No Food is  available at the moment!'});
+    return res.status(StatusCodes.NOT_FOUND).json({ msg: 'No Food is available at the moment!'});
 };
 
 
@@ -28,26 +28,38 @@ const  getTopRestaurants = async (req, res) => {
 
 };
 
-const  searchFoods = async (req, res) => {
-    
-};
+
 
 
 
 const  getSingleRestaurant = async (req, res) => {
+
+    const {id:vendorId} = req.params
+    const vendor = await Vendor.findOne({_id:vendorId}).populate('foods')
+    if(!vendor){
+        throw new CustomError.NotFoundError(`No vendor with id : ${vendorId}`);
+      }
+  res.status(StatusCodes.OK).json({vendor}) 
+
     
 };
 
 
 const  getAvailableOffers = async (req, res) => {
+    const offers = await Offer.find({isActive: true});
+
+    if(offers){
+        return res.status(StatusCodes.OK).json(offers);
+    }
     
+    return res.status(StatusCodes.NOT_FOUND).json({ msg: 'no offer at the moment!'});
+
 };
 
 
 module.exports= {
     getAvailableFood,
     getTopRestaurants,
-    searchFoods, 
     getSingleRestaurant,
     getAvailableOffers
 }
