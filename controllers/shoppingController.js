@@ -3,8 +3,6 @@ const Vendor = require('../models/vendor')
 const { StatusCodes } = require('http-status-codes');
 const CustomError = require('../errors');
 
-
- 
 const  getAvailableFood = async (req, res) => {
    
     const food = await Vendor.find({serviceAvailable: true}).sort([['rating', 'descending']]).populate('foods')
@@ -14,7 +12,6 @@ const  getAvailableFood = async (req, res) => {
     }
     return res.status(StatusCodes.NOT_FOUND).json({ msg: 'No Food is available at the moment!'});
 };
-
 
 const  getTopRestaurants = async (req, res) => {
     
@@ -27,9 +24,6 @@ const  getTopRestaurants = async (req, res) => {
     return res.status(StatusCodes.NOT_FOUND).json({ msg: 'no data at the moment!'});
 
 };
-
-
-
 
 
 const  getSingleRestaurant = async (req, res) => {
