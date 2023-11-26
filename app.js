@@ -8,6 +8,7 @@ const cors = require('cors');
 //Database
 const connectDB = require('./database/connect');
 app.use(cors());
+app.use(express.json());
 
 app.get('/', (req, res) => {
     res.send('<h1>Welcome to God Plan Food </h1>');

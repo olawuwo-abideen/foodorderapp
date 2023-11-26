@@ -68,8 +68,6 @@ const getAllVendors = async (req, res) => {
             return res.status(StatusCodes.OK).json(result);
         }
     }
-
-    return res.json({ message: 'Unable to verify Delivery User'});
     return res.status(StatusCodes.NOT_FOUND).json({ message: 'Delivery User not found' });
 
     
