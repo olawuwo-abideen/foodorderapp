@@ -3,9 +3,11 @@ require('dotenv').config();
 //Express
 const express = require('express');
 const app = express();
+const cors = require('cors');
 
 //Database
 const connectDB = require('./database/connect');
+app.use(cors());
 
 app.get('/', (req, res) => {
     res.send('<h1>Welcome to God Plan Food </h1>');

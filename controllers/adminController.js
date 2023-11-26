@@ -52,19 +52,39 @@ const getAllVendors = async (req, res) => {
     
   };
 
-
-
-
   
   const  verifyDeliveryUser = async (req, res) => {
+
+    const { _id, status } = req.body;
+
+    if(_id){
+
+        const profile = await Delivery.findById(_id);
+
+        if(profile){
+            profile.verified = status;
+            const result = await profile.save();
+
+            return res.status(StatusCodes.OK).json(result);
+        }
+    }
+
+    return res.json({ message: 'Unable to verify Delivery User'});
+    return res.status(StatusCodes.NOT_FOUND).json({ message: 'Delivery User not found' });
+
     
   };
 
-
-
-  
   const  getDeliveryUsers = async (req, res) => {
     
+    const deliveryusers = await Delivery.find();
+
+    if(deliveryusers){
+        return res.status(StatusCodes.OK).json(deliveryusers);
+    }
+    return res.status(StatusCodes.NOT_FOUND).json({ message: 'Delivery User not found' });
+
+
   };
 
 
