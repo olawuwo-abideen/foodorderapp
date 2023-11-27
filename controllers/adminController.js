@@ -5,15 +5,17 @@ const { StatusCodes } = require('http-status-codes');
 const CustomError = require('../errors');
 
 
-
 const createVendor = async (req, res) => {
-
+  try {
   req.body.user = req.user.userId;
   const createvendor = await Vendor.create(req.body);
   res.status(StatusCodes.CREATED).json({ createvendor });
-    
-  };
-
+} catch (error) {
+  console.error('Error creating vendor:', error);
+  res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: 'Internal Server Error' });
+}
+  
+}
   const  getSingleVendor = async (req, res) => {
     const {id:vendorId} = req.params
     const vendor = await Vendor.findOne({_id:vendorId});
