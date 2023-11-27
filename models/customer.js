@@ -71,9 +71,9 @@ customerSchema.pre('save', async function (next) {
   }
 });
 
-customerSchema.methods.comparePassword = async function (candidatePassword) {
+customerSchema.methods.comparePassword = async function (customerPassword) {
   try {
-    const isMatch = await bcrypt.compare(candidatePassword, this.password);
+    const isMatch = await bcrypt.compare(customerPassword, this.password);
     return isMatch;
   } catch (error) {
     return false;
@@ -82,8 +82,4 @@ customerSchema.methods.comparePassword = async function (candidatePassword) {
 
 
 
-
-
 module.exports = mongoose.model('customer', customerSchema);
-
-
