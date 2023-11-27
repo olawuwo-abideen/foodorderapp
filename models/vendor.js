@@ -60,6 +60,25 @@ const vendorSchema = new mongoose.Schema(
 )
 
 
+vendorSchema.pre('save', async function (next) {
+  try {
+    if (!this.isModified('password')) return next();
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
+
+vendorSchema.methods.comparePassword = async function (vendorPassword) {
+  try {
+    const isMatch = await bcrypt.compare(vendorPassword, this.password);
+    return isMatch;
+  } catch (error) {
+    return false;
+  }
+};
 
 
 
