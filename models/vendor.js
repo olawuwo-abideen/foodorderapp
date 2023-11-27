@@ -33,10 +33,10 @@ const vendorSchema = new mongoose.Schema(
             required: true,
             maxlength: 100,
             unique: true,
-            match: [
-              /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-              'Please provide a valid email',
-            ],
+            validate: {
+              validator: validator.isEmail,
+              message: 'Please provide valid email',
+            },
           },
         password: {
             type: String,

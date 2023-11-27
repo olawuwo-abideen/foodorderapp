@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 
-const foodSchema = new mongoose.Schema(
+const orderSchema = new mongoose.Schema(
     {
         orderId: {
           type: String,
@@ -56,4 +56,4 @@ const foodSchema = new mongoose.Schema(
 
 
 
-module.exports = mongoose.model('food', foodSchema);
+module.exports = mongoose.model('order', orderSchema);
