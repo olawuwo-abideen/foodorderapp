@@ -21,7 +21,7 @@ const  getTopRestaurants = async (req, res) => {
         return res.status(StatusCodes.OK).json({toprestaurant})
     }
     
-    return res.status(StatusCodes.NOT_FOUND).json({ msg: 'no data at the moment!'});
+    return res.status(StatusCodes.NOT_FOUND).json({ msg: 'no restaurant at the moment!'});
 
 };
 

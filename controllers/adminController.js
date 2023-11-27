@@ -16,7 +16,9 @@ const createVendor = async (req, res) => {
 }
   
 }
-  const  getSingleVendor = async (req, res) => {
+  
+
+const  getSingleVendor = async (req, res) => {
     const {id:vendorId} = req.params
     const vendor = await Vendor.findOne({_id:vendorId});
     if(!vendor){
