@@ -1,10 +1,4 @@
-const Customer = require('../models/customer')
 const Delivery = require('../models/delivery')
-const Food = require('../models/food')
-const Vendor = require('../models/vendor')
-const Offer = require('../models/offer')
-const Order = require('../models/order')
-const Transaction = require('../models/transaction')
 const { StatusCodes } = require('http-status-codes');
 const CustomError = require('../errors');
 const { attachCookiesToResponse, createDeliveryToken } = require('../utils');
@@ -12,9 +6,9 @@ const { attachCookiesToResponse, createDeliveryToken } = require('../utils');
  
 const  registerDelivery = async (req, res) => {
 
-  const  { name, email, password } = req.body;
+const  { name, email, password } = req.body;
 
-  const emailAlreadyExists = await Delivery.findOne({ email });
+const emailAlreadyExists = await Delivery.findOne({ email });
   if (emailAlreadyExists) {
     throw new CustomError.BadRequestError('Email already exists');
   }
@@ -23,7 +17,7 @@ const  registerDelivery = async (req, res) => {
   const tokenDelivery = createDeliveryToken(delivery);
   attachCookiesToResponse({ res, delivery: tokenDelivery });
   res.status(StatusCodes.CREATED).json({ delivery: tokenDelivery });
-    
+
 };
 
 
@@ -51,7 +45,7 @@ const  loginDelivery = async (req, res) => {
 
 const logout = (req, res) => {
     try {
-      res.cookie('tokenUser', 'logout', {
+      res.cookie('tokenDelivery', 'logout', {
         httpOnly: true,
         expires: new Date(0),
       });
@@ -63,15 +57,15 @@ const logout = (req, res) => {
   };
   
 const  getDeliveryProfile = async (req, res) => {
-  const { id: deliveryId } = req.params;
+  const {id: deliveryId} = req.params;
 
-  const delivery = await Delivery.findOne({ _id: deliveryId })
+  const delivery = await Delivery.findOne({_id: deliveryId})
 
   if (!delivery) {
     throw new CustomError.NotFoundError(`No delivery with id : ${deliveryId}`);
   }
 
-  res.status(StatusCodes.OK).json({ delivery });
+  res.status(StatusCodes.OK).json({delivery});
     
 };
 
@@ -95,10 +89,6 @@ const  updateDeliveryProfile = async (req, res) => {
 };
 
 
-const  updateDeliveryStatus = async (req, res) => {
-    
-};
-
 
 
 module.exports = {
@@ -106,6 +96,5 @@ module.exports = {
     loginDelivery,
     logout,
     getDeliveryProfile,
-    updateDeliveryProfile,
-    updateDeliveryStatus
+    updateDeliveryProfile
 }
