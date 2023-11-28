@@ -12,7 +12,7 @@ const { attachCookiesToResponse, createDeliveryToken } = require('../utils');
  
 const  registerDelivery = async (req, res) => {
 
-    const  { name, email, password } = req.body;
+  const  { name, email, password } = req.body;
 
   const emailAlreadyExists = await Delivery.findOne({ email });
   if (emailAlreadyExists) {
@@ -33,19 +33,19 @@ const  loginDelivery = async (req, res) => {
     if (!email || !password) {
       throw new CustomError.BadRequestError('Please provide email and password');
     }
-    const customer = await Customer.findOne({ email });
+    const delivery = await Delivery.findOne({ email });
   
-    if (!customer) {
+    if (!delivery) {
       throw new CustomError.UnauthenticatedError('Invalid Credentials');
     }
-    const isPasswordCorrect = await customer.comparePassword(password);
+    const isPasswordCorrect = await delivery.comparePassword(password);
     if (!isPasswordCorrect) {
       throw new CustomError.UnauthenticatedError('Invalid Credentials');
     }
-    const tokenCustomer = createCustomerToken(user);
-    attachCookiesToResponse({ res, customer: tokenCustomer });
+    const tokenDelivery = createDeliveryToken(delivery);
+    attachCookiesToResponse({ res, delivery: tokenDelivery });
   
-    res.status(StatusCodes.OK).json({ customer: tokenCustomer });
+    res.status(StatusCodes.OK).json({ delivery: tokenDelivery });
 };
 
 
@@ -63,12 +63,34 @@ const logout = (req, res) => {
   };
   
 const  getDeliveryProfile = async (req, res) => {
+  const { id: deliveryId } = req.params;
+
+  const delivery = await Delivery.findOne({ _id: deliveryId })
+
+  if (!delivery) {
+    throw new CustomError.NotFoundError(`No delivery with id : ${deliveryId}`);
+  }
+
+  res.status(StatusCodes.OK).json({ delivery });
     
 };
 
 
 
 const  updateDeliveryProfile = async (req, res) => {
+
+  const { id: deliveryId } = req.params;
+
+  const delivery = await Delivery.findOneAndUpdate({ _id: deliveryId }, req.body, {
+    new: true,
+    runValidators: true,
+  });
+
+  if (!delivery) {
+    throw new CustomError.NotFoundError(`No product with id : ${deliveryId}`);
+  }
+
+  res.status(StatusCodes.OK).json({delivery});
     
 };
 
@@ -82,6 +104,7 @@ const  updateDeliveryStatus = async (req, res) => {
 module.exports = {
     registerDelivery,
     loginDelivery,
+    logout,
     getDeliveryProfile,
     updateDeliveryProfile,
     updateDeliveryStatus
