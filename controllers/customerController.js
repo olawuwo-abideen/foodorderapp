@@ -10,22 +10,22 @@ const CustomError = require('../errors');
 const { attachCookiesToResponse, createCustomerToken } = require('../utils');
 
 
-
 const register = async (req, res) => {
 
-    const { email, phoneNumber, password } = req.body;
+  const { fullName, email, password } = req.body;
 
   const emailAlreadyExists = await Vendor.findOne({ email });
   if (emailAlreadyExists) {
     throw new CustomError.BadRequestError('Email already exists');
   }
 
-  const vendor = await Vendor.create({ name, email, password, foodType, address, phoneNumber, serviceAvailable, rating, verified });
-  const tokenVendor = createVendorToken(vendor);
+  const vendor = await Vendor.create({ email, password, fullName, address, phoneNumber, latitude, longitude, verified });
+  const tokenVendor = createCustomerToken(vendor);
   attachCookiesToResponse({ res, vendor: tokenVendor });
   res.status(StatusCodes.CREATED).json({ vendor: tokenVendor });
     
 };
+
 
 const  login = async (req, res) => {
 
@@ -50,22 +50,19 @@ const  login = async (req, res) => {
   
 };
 
-const logout = (req, res) => {
-    try {
-      res.cookie('tokenUser', 'logout', {
-        httpOnly: true,
-        expires: new Date(0),
-      });
-      res.status(StatusCodes.OK).json({ message: 'User logged out successfully' });
-    } catch (error) {
-      console.error('Error in logout:', error);
-      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: 'Internal Server Error' });
-    }
+const logout = async (req, res) => {
+    res.cookie('tokenCustomer', 'logout', {
+      httpOnly: true,
+      expires: new Date(Date.now() + 1000),
+    });
+    res.status(StatusCodes.OK).json({ msg: 'user logged out!' });
   };
-
+  
+  
 
 const getCustomerProfile = async (req, res) => {
-  
+
+    
 };
 
 
@@ -138,6 +135,7 @@ const  createPayment = async (req, res) => {
 module.exports = {
     register,
     login ,
+    logout,
     getCustomerProfile,
     updateCustomerProfile,
     assignOrderForDelivery,
