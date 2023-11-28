@@ -7,14 +7,14 @@ const { attachCookiesToResponse, createVendorToken } = require('../utils');
 
 
 const registerVendor = async (req, res) => {
-  const { email, name, password } = req.body;
+  const { email, name, password, foodType, phoneNumber, address } = req.body;
 
   const emailAlreadyExists = await Vendor.findOne({ email });
   if (emailAlreadyExists) {
     throw new CustomError.BadRequestError('Email already exists');
   }
 
-  const vendor = await Vendor.create({ name, email, password, foodType, address, phoneNumber, serviceAvailable, rating, foods });
+  const vendor = await Vendor.create({ name, email, password, foodType, address, phoneNumber, serviceAvailable, rating, latitude, longitude });
   const tokenVendor = createVendorToken(vendor);
   attachCookiesToResponse({ res, vendor: tokenVendor });
   res.status(StatusCodes.CREATED).json({ vendor: tokenVendor });

@@ -34,6 +34,14 @@ const customerSchema = new mongoose.Schema(
             required: true,
             maxlength: 11,
           },
+          latitude: {
+            type: Number,
+            required: true,
+          },
+          longitude: {
+            type: Number,
+            required: true,
+          },
         verified: {
             type: Boolean,
             default :false,
