@@ -19,7 +19,7 @@ const  registerDelivery = async (req, res) => {
     throw new CustomError.BadRequestError('Email already exists');
   }
 
-  const delivery = await Delivery.create({ name, email, password, foodType, address, phoneNumber, serviceAvailable, rating, verified });
+  const delivery = await Delivery.create({ email, password, name, address, phoneNumber, isAvailable, verified, latitude, longitude });
   const tokenDelivery = createDeliveryToken(delivery);
   attachCookiesToResponse({ res, delivery: tokenDelivery });
   res.status(StatusCodes.CREATED).json({ delivery: tokenDelivery });
