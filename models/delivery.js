@@ -18,12 +18,7 @@ const deliverySchema = new mongoose.Schema(
           required: true,
           minlength: [6, 'Password must be at least 6 characters long']
         },
-        firstName: {
-          type: Number,
-          required: true,
-          maxlength: 20
-        },
-        lastName: {
+        name: {
             type: String,
             required: true,
             maxlength: 20,

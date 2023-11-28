@@ -33,6 +33,10 @@ const  addSingleFood = async (req, res) => {
 };
 
 const  getAllFoods = async (req, res) => {
+
+    const foods = await Food.find({});
+
+    res.status(StatusCodes.OK).json({ foods });
     
 };
 
@@ -53,12 +57,25 @@ const  processOrder = async (req, res) => {
 
 
 const  getAllOffers = async (req, res) => {
+
+    const offers = await Offer.find({})
+    res.status(StatusCodes.OK).json({offers}) 
     
 };
 
 
 
 const  addSingleOffer = async (req, res) => {
+
+    const { id: productId } = req.params;
+
+    const product = await Product.findOne({ _id: productId }).populate('reviews');
+  
+    if (!product) {
+      throw new CustomError.NotFoundError(`No product with id : ${productId}`);
+    }
+  
+    res.status(StatusCodes.OK).json({ product });
     
 };
 

@@ -6,15 +6,17 @@ const CustomError = require('../errors');
 
 
 const createVendor = async (req, res) => {
-  try {
-  req.body.user = req.user.userId;
-  const createvendor = await Vendor.create(req.body);
-  res.status(StatusCodes.CREATED).json({ createvendor });
-} catch (error) {
-  console.error('Error creating vendor:', error);
-  res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: 'Internal Server Error' });
-}
-  
+  const { email, name, password } = req.body;
+
+  const emailAlreadyExists = await Vendor.findOne({ email });
+  if (emailAlreadyExists) {
+    throw new CustomError.BadRequestError('Email already exists');
+  }
+
+  const user = await Vendor.create({ name, email, password, role });
+  const tokenUser = createTokenUser(user);
+  attachCookiesToResponse({ res, user: tokenUser });
+  res.status(StatusCodes.CREATED).json({ user: tokenUser });
 }
   
 
