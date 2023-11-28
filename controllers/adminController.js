@@ -5,7 +5,7 @@ const { StatusCodes } = require('http-status-codes');
 const CustomError = require('../errors');
 
 
-const createVendor = async (req, res) => {
+const registerVendor = async (req, res) => {
   const { email, name, password } = req.body;
 
   const emailAlreadyExists = await Vendor.findOne({ email });
@@ -93,7 +93,7 @@ const getAllVendors = async (req, res) => {
 
 
   module.exports = {
-    createVendor,
+    registerVendor,
     getSingleVendor,
     getAllVendors,
     getAllTransactions,
