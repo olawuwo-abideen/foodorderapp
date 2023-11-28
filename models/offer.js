@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 
 
-
 const offerSchema = new mongoose.Schema(
     {
         offerType: {
@@ -10,7 +9,7 @@ const offerSchema = new mongoose.Schema(
        
         },
         vendors: [
-          {type: Schema.Types.ObjectId, ref: 'vendor'}
+          {type: mongoose.Schema.ObjectId, ref: 'vendor'}
       ],
         
         title: {
