@@ -8,11 +8,6 @@ const vendorSchema = new mongoose.Schema(
           required: true,
           maxlength: 50,
         },
-        ownerName: {
-          type: String,
-          required: true,
-          maxlength: 50,
-        },
         foodType: {
           type: String,
           required: true,

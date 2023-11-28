@@ -3,6 +3,7 @@ const Transaction = require('../models/vendor')
 const Vendor = require('../models/vendor')
 const { StatusCodes } = require('http-status-codes');
 const CustomError = require('../errors');
+const { attachCookiesToResponse, createVendorToken } = require('../utils');
 
 
 const registerVendor = async (req, res) => {
@@ -13,10 +14,10 @@ const registerVendor = async (req, res) => {
     throw new CustomError.BadRequestError('Email already exists');
   }
 
-  const user = await Vendor.create({ name, email, password, role });
-  const tokenUser = createTokenUser(user);
-  attachCookiesToResponse({ res, user: tokenUser });
-  res.status(StatusCodes.CREATED).json({ user: tokenUser });
+  const vendor = await Vendor.create({ name, email, password, foodType, address, phoneNumber, serviceAvailable, rating, foods });
+  const tokenVendor = createVendorToken(vendor);
+  attachCookiesToResponse({ res, vendor: tokenVendor });
+  res.status(StatusCodes.CREATED).json({ vendor: tokenVendor });
 }
   
 
