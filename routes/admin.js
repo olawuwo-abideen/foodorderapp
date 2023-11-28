@@ -3,7 +3,7 @@ const router = express.Router();
 
 
 const {
-    createVendor,
+    registerVendor,
     getSingleVendor,
     getAllVendors,
     getAllTransactions,
@@ -15,7 +15,7 @@ const {
 
 
 
-router.post('/vendor', createVendor)
+router.post('/vendor', registerVendor)
 
 router.get('/vendors', getAllVendors)
 router.get('/vendor/:id', getSingleVendor)
