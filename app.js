@@ -15,6 +15,19 @@ app.get('/', (req, res) => {
   });
 
   
+
+
+
+
+  const shoppingRouter = require('./routes/shopping');
+
+
+
+
+
+  app.use('/api/v1/shopping', shoppingRouter);
+
+
 const port = process.env.PORT || 3000;
 const start = async () => {
   try {
