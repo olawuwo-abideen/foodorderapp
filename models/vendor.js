@@ -5,7 +5,12 @@ const vendorSchema = new mongoose.Schema(
     {
         name: {
           type: String,
-          required: true,
+          required: true,  
+          maxlength: 50,
+        },
+       ownerName: {
+          type: String,
+          required: true,  
           maxlength: 50,
         },
         foodType: {

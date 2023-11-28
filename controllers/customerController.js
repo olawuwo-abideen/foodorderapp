@@ -50,6 +50,26 @@ const  login = async (req, res) => {
   
 };
 
+const updateCustomerPassword = async (req, res) => {
+    const { oldPassword, newPassword } = req.body;
+    if (!oldPassword || !newPassword) {
+      throw new CustomError.BadRequestError('Please provide both values');
+    }
+    const customer = await Customer.findOne({ _id: req.user.userId });
+  
+    const isPasswordCorrect = await customer.comparePassword(oldPassword);
+    if (!isPasswordCorrect) {
+      throw new CustomError.UnauthenticatedError('Invalid Credentials');
+    }
+    customer.password = newPassword;
+  
+    await customer.save();
+    res.status(StatusCodes.OK).json({ msg: 'Success! Password Updated.' });
+  };
+  
+
+
+
 const logout = async (req, res) => {
     res.cookie('tokenCustomer', 'logout', {
       httpOnly: true,
@@ -57,16 +77,31 @@ const logout = async (req, res) => {
     });
     res.status(StatusCodes.OK).json({ msg: 'user logged out!' });
   };
-  
+
   
 
 const getCustomerProfile = async (req, res) => {
+
+    const customer = req.user;
+ 
+    if(customer){
+        
+        const profile =  await Customer.findById(customer._id);
+        
+        if(profile){
+             
+            return res.status(StatusCodes.CREATED).json(profile);
+        }
+
+    }
+    return res.status(StatusCodes.BAD_REQUEST).json({ msg: 'Error while Fetching Profile'});
 
     
 };
 
 
 const  updateCustomerProfile = async (req, res) => {
+
   
 };
 
@@ -87,7 +122,15 @@ const  createOrder = async (req, res) => {
 
 
 const getSingleOrder = async (req, res) => {
-  
+    const { id: orderId } = req.params;
+
+  const order = await Order.findOne({ _id: orderId })
+
+  if (!order) {
+    throw new CustomError.NotFoundError(`No product with id : ${orderId}`);
+  }
+
+  res.status(StatusCodes.OK).json({order});
 };
 
 
@@ -136,6 +179,7 @@ module.exports = {
     register,
     login ,
     logout,
+    updateCustomerPassword,
     getCustomerProfile,
     updateCustomerProfile,
     assignOrderForDelivery,

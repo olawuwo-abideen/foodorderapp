@@ -7,21 +7,22 @@ const Order = require('../models/order')
 const Transaction = require('../models/transaction')
 const { StatusCodes } = require('http-status-codes');
 const CustomError = require('../errors');
+const { attachCookiesToResponse, createDeliveryToken } = require('../utils');
 
  
 const  registerDelivery = async (req, res) => {
 
-    const { email, phoneNumber, password } = req.body;
+    const  { name, email, password } = req.body;
 
-  const emailAlreadyExists = await Vendor.findOne({ email });
+  const emailAlreadyExists = await Delivery.findOne({ email });
   if (emailAlreadyExists) {
     throw new CustomError.BadRequestError('Email already exists');
   }
 
-  const vendor = await Vendor.create({ name, email, password, foodType, address, phoneNumber, serviceAvailable, rating, verified });
-  const tokenVendor = createVendorToken(vendor);
-  attachCookiesToResponse({ res, vendor: tokenVendor });
-  res.status(StatusCodes.CREATED).json({ vendor: tokenVendor });
+  const delivery = await Delivery.create({ name, email, password, foodType, address, phoneNumber, serviceAvailable, rating, verified });
+  const tokenDelivery = createDeliveryToken(delivery);
+  attachCookiesToResponse({ res, delivery: tokenDelivery });
+  res.status(StatusCodes.CREATED).json({ delivery: tokenDelivery });
     
 };
 

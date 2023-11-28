@@ -1,6 +1,7 @@
 const Food = require('../models/food')
 const Offer = require('../models/offer')
 const Order = require('../models/order')
+const Vendor = require('../models/vendor')
 const { StatusCodes } = require('http-status-codes');
 const CustomError = require('../errors');
 
@@ -106,7 +107,7 @@ const  editSingleOffer = async (req, res) => {
 
 
 
-const logout = (req, res) => {
+const vendorlogout = (req, res) => {
     try {
       res.cookie('tokenUser', 'logout', {
         httpOnly: true,
@@ -132,6 +133,7 @@ const logout = (req, res) => {
 module.exports = {
 
     vendorLogin,
+    vendorLogout,
     getVendorProfile,
     updateVendorProfile,
     updateVendorService,
