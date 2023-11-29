@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-
+const rateLimiter = require('express-rate-limit');
 
 const {
     vendorSignup,
@@ -18,10 +18,18 @@ const {
     editSingleOffer
 } = require('../controllers/vendorController')
 
+const apiLimiter = rateLimiter({
+    windowMs: 10 * 60 * 1000,
+    max: 10,
+    message: {
+      msg: 'Too many requests from this IP, please try again after 10 minutes',
+    },
+  });
 
-router.post('register', vendorSignup);
 
-router.post('login', vendorLogin);
+router.post('register', apiLimiter, vendorSignup);
+
+router.post('login', apiLimiter, vendorLogin);
 
 router.get('logout', vendorLogout);
 
