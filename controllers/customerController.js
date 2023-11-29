@@ -14,15 +14,15 @@ const register = async (req, res) => {
 
   const { fullName, email, password } = req.body;
 
-  const emailAlreadyExists = await Vendor.findOne({ email });
+  const emailAlreadyExists = await Customer.findOne({ email });
   if (emailAlreadyExists) {
     throw new CustomError.BadRequestError('Email already exists');
   }
 
-  const vendor = await Vendor.create({ email, password, fullName, address, phoneNumber, latitude, longitude, verified });
-  const tokenVendor = createCustomerToken(vendor);
-  attachCookiesToResponse({ res, vendor: tokenVendor });
-  res.status(StatusCodes.CREATED).json({ vendor: tokenVendor });
+  const customer = await Customer.create({ email, password, fullName, address, phoneNumber, latitude, longitude, verified });
+  const tokenCustomer = createCustomerToken(customer);
+  attachCookiesToResponse({ res, customer: tokenCustomer });
+  res.status(StatusCodes.CREATED).json({ customer: tokenCustomer });
     
 };
 
