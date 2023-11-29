@@ -174,37 +174,6 @@ const  getAllOrders = async (req, res) => {
 
 
 
-const  addToCart = async (req, res) => {
-  
-};
-
-
-
-
-const getCart = async (req, res) => {
-  
-};
-
-
-const  deleteCart = async (req, res) => {
-  
-};
-
-
-
-
-const  verifyOffer = async (req, res) => {
-  
-};
-
-
-
-
-const  createPayment = async (req, res) => {
-  
-};
-
-
 
 
 
@@ -220,9 +189,4 @@ module.exports = {
     createOrder,
     getSingleOrder,
     getAllOrders,
-    addToCart,
-    getCart,
-    deleteCart,
-    verifyOffer,
-    createPayment
 }
