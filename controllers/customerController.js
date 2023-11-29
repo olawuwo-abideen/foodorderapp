@@ -1,8 +1,6 @@
 const Customer = require('../models/customer')
 const Delivery = require('../models/delivery')
-const Food = require('../models/food')
 const Vendor = require('../models/vendor')
-const Offer = require('../models/offer')
 const Order = require('../models/order')
 const Transaction = require('../models/transaction')
 const { StatusCodes } = require('http-status-codes');
@@ -10,7 +8,7 @@ const CustomError = require('../errors');
 const { attachCookiesToResponse, createCustomerToken } = require('../utils');
 
 
-const register = async (req, res) => {
+const customerSignup = async (req, res) => {
 
   const { fullName, email, password } = req.body;
 
@@ -27,7 +25,7 @@ const register = async (req, res) => {
 };
 
 
-const  login = async (req, res) => {
+const  customerLogin = async (req, res) => {
 
     const { email, password } = req.body;
 
@@ -70,7 +68,7 @@ const updateCustomerPassword = async (req, res) => {
 
 
 
-const logout = async (req, res) => {
+const customerLogout = async (req, res) => {
     res.cookie('tokenCustomer', 'logout', {
       httpOnly: true,
       expires: new Date(Date.now() + 1000),
@@ -178,9 +176,9 @@ const  getAllOrders = async (req, res) => {
 
 
 module.exports = {
-    register,
-    login ,
-    logout,
+    customerSignup,
+    customerLogin ,
+    customerLogout,
     updateCustomerPassword,
     getCustomerProfile,
     updateCustomerProfile,
