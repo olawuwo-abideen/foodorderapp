@@ -105,13 +105,6 @@ res.status(StatusCodes.OK).json({order})
     
 };
 
-const  processOrder = async (req, res) => {
-    
-};
-
-
-
-
 
 const  getAllOffers = async (req, res) => {
 
@@ -120,25 +113,40 @@ const  getAllOffers = async (req, res) => {
     
 };
 
+const  getSingleOffer = async (req, res) => {
 
-
-const  addSingleOffer = async (req, res) => {
-
-    const { id: productId } = req.params;
-
-    const product = await Product.findOne({ _id: productId }).populate('reviews');
-  
-    if (!product) {
-      throw new CustomError.NotFoundError(`No product with id : ${productId}`);
+  const {id:offerId} = req.params
+  const offer = await Offer.findOne({_id:offerId});
+  if(!offer){
+      throw new CustomError.NotFoundError(`No offer with id : ${offerId}`);
     }
-  
-    res.status(StatusCodes.OK).json({ product });
+res.status(StatusCodes.OK).json({offer})  
     
+};
+
+
+const  addOffer = async (req, res) => {
+
+  const createoffer = await Offer.create(req.body)
+  res.status(StatusCodes.CREATED).json({createoffer})
 };
 
 
 
 const  editSingleOffer = async (req, res) => {
+
+  const { id: offerId } = req.params;
+
+  const updateoffer = await Offer.findOneAndUpdate({ _id: offerId }, req.body, {
+    new: true,
+    runValidators: true,
+  });
+
+  if (!updateoffer) {
+    throw new CustomError.NotFoundError(`No vendor profile with id : ${offerId}`);
+  }
+
+  res.status(StatusCodes.OK).json({updateoffer});
     
 };
 
@@ -177,9 +185,9 @@ module.exports = {
     getAllFoods,
     getAllOrder,
     getSingleOrder,
-    processOrder,
     getAllOffers,
-    addSingleOffer,
+    getSingleOffer,
+    addOffer,
     editSingleOffer
 
 };
