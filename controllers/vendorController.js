@@ -7,7 +7,7 @@ const { attachCookiesToResponse, createVendorToken } = require('../utils');
 const CustomError = require('../errors');
 
 
-const registerVendor = async (req, res) => {
+const vendorSignup = async (req, res) => {
   const { email, name, password, } = req.body;
 
   const emailAlreadyExists = await Vendor.findOne({ email });
@@ -176,7 +176,7 @@ const vendorLogout = (req, res) => {
 
 
 module.exports = {
-   registerVendor,
+   vendorSignup,
     vendorLogin,
     vendorLogout,
     updateVendorPassword,

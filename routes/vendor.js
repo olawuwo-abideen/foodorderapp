@@ -3,7 +3,7 @@ const router = express.Router();
 
 
 const {
-    registerVendor,
+    vendorSignup,
     vendorLogin,
     vendorLogout,
     updateVendorPassword,
@@ -19,25 +19,30 @@ const {
 } = require('../controllers/vendorController')
 
 
+router.post('vendor/register', vendorSignup);
 
-router.get('/login', vendorLogin);
+router.post('vendor/login', vendorLogin);
 
-router.get('/profile', getVendorProfile);
-router.patch('/profile', updateVendorProfile);
-router.patch('/service', updateVendorService);
+router.get('vendor/logout', vendorLogout);
 
-router.post('/food', addSingleFood);
-router.get('/food', getAllFoods)
+router.patch('vendor/password', updateVendorPassword);
 
 
-router.get('/orders', getCurrentOrder);
-router.put('/order/:id/process', processOrder);
-router.get('/order/:id', getOrderDetails)
+router.patch('vendor/profile', updateVendorProfile);
+
+
+router.post('vendor/food', addFood);
+router.get('vendor/foods', getAllFoods)
+
+
+router.get('vendor/orders', getAllOrder);
+router.get('vendor/order/:id', getSingleOrder)
  
 
 //Offers
-router.get('/offers', getAllOffers);
-router.post('/offer', addSingleOffer);
-router.put('/offer/:id', editSingleOffer)
+router.get('vendor/offers', getAllOffers);
+router.post('vendor/offer', addOffer);
+router.put('vendor/offer/:id', getSingleOffer)
+router.patch('vendoroffer/', editSingleOffer);
 
 
