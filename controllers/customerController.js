@@ -146,28 +146,29 @@ const validateTransaction = async (req, res) => {
 };
 
 const  createOrder = async (req, res) => {
-  req.body.user = req.user.userId;
-  const product = await Product.create(req.body);
-  res.status(StatusCodes.CREATED).json({ product });
+  req.body.customer = req.user.customerId;
+  const createorder = await Order.create(req.body);
+  res.status(StatusCodes.CREATED).json({ createorder });
 };
 
-
 const getSingleOrder = async (req, res) => {
-    const { id: orderId } = req.params;
+    const { id: customerId } = req.params;
 
-  const order = await Order.findOne({ _id: orderId })
+  const customerorder = await Customer.findOne({ _id: customerId }).populate("orders");
 
-  if (!order) {
-    throw new CustomError.NotFoundError(`No product with id : ${orderId}`);
+  if (!customerorder) {
+    throw new CustomError.NotFoundError(`No Order with id : ${orderId}`);
   }
 
-  res.status(StatusCodes.OK).json({order});
+  res.status(StatusCodes.OK).json({customerorder});
 };
 
 
 const  getAllOrders = async (req, res) => {
-  const orders = await Order.find({});
-  res.status(StatusCodes.OK).json({ orders });
+  
+  const customers = await Customer.find({});
+  res.status(StatusCodes.OK).json({customers}).populate("items.food");
+
 };
 
 
