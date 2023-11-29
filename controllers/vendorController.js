@@ -3,6 +3,7 @@ const Offer = require('../models/offer')
 const Order = require('../models/order')
 const Vendor = require('../models/vendor')
 const { StatusCodes } = require('http-status-codes');
+const { attachCookiesToResponse, createVendorToken } = require('../utils');
 const CustomError = require('../errors');
 
 
