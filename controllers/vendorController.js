@@ -70,7 +70,7 @@ const  updateVendorProfile = async (req, res) => {
   });
 
   if (!profile) {
-    throw new CustomError.NotFoundError(`No customer profile with id : ${vendorId}`);
+    throw new CustomError.NotFoundError(`No vendor profile with id : ${vendorId}`);
   }
 
   res.status(StatusCodes.OK).json({profile});
@@ -78,29 +78,30 @@ const  updateVendorProfile = async (req, res) => {
 };
 
 
-
-const  updateVendorService = async (req, res) => {
-    
-};
-
-
-const  addSingleFood = async (req, res) => {
-    
+const  addFood = async (req, res) => {
+  const createfood = await Food.create(req.body)
+  res.status(StatusCodes.CREATED).json({createfood})
 };
 
 const  getAllFoods = async (req, res) => {
-
     const foods = await Food.find({});
+    res.status(StatusCodes.OK).json({foods});
 
-    res.status(StatusCodes.OK).json({ foods });
+};
+
+const  getAllOrder = async (req, res) => {
+  const orders = await Order.find({})
+  res.status(StatusCodes.OK).json({orders}) 
     
 };
 
-const  getCurrentOrder = async (req, res) => {
-    
-};
-
-const  getOrderDetails = async (req, res) => {
+const  getSingleOrder = async (req, res) => {
+  const {id:orderId} = req.params
+  const order = await Order.findOne({_id:orderId});
+  if(!order){
+      throw new CustomError.NotFoundError(`No order with id : ${orderId}`);
+    }
+res.status(StatusCodes.OK).json({order})  
     
 };
 
@@ -172,11 +173,10 @@ module.exports = {
     vendorLogout,
     updateVendorPassword,
     updateVendorProfile,
-    updateVendorService,
-    addSingleFood,
+    addFood,
     getAllFoods,
-    getCurrentOrder,
-    getOrderDetails,
+    getAllOrder,
+    getSingleOrder,
     processOrder,
     getAllOffers,
     addSingleOffer,
