@@ -82,26 +82,33 @@ const logout = async (req, res) => {
 
 const getCustomerProfile = async (req, res) => {
 
-    const customer = req.user;
- 
-    if(customer){
-        
-        const profile =  await Customer.findById(customer._id);
-        
-        if(profile){
-             
-            return res.status(StatusCodes.CREATED).json(profile);
-        }
+  const { id: customerId } = req.params;
 
-    }
-    return res.status(StatusCodes.BAD_REQUEST).json({ msg: 'Error while Fetching Profile'});
+  const profile = await Customer.findOne({ _id: customerId })
 
+  if (!profile) {
+    throw new CustomError.NotFoundError(`No customer profile with id : ${customerId}`);
+  }
+
+  res.status(StatusCodes.OK).json({ profile });
     
 };
 
 
 const  updateCustomerProfile = async (req, res) => {
 
+  const { id: customerId } = req.params;
+
+  const profile = await Customer.findOneAndUpdate({ _id: customerId }, req.body, {
+    new: true,
+    runValidators: true,
+  });
+
+  if (!profile) {
+    throw new CustomError.NotFoundError(`No customer profile with id : ${customerId}`);
+  }
+
+  res.status(StatusCodes.OK).json({profile});
   
 };
 
