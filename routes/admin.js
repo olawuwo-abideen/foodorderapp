@@ -15,14 +15,14 @@ const {
 
 
 
-router.get('admin/vendors', getAllVendors)
-router.get('admin/vendor/:id', getSingleVendor)
+router.get('vendors', getAllVendors)
+router.get('vendor/:id', getSingleVendor)
 
 
-router.get('admin/transactions', getAllTransactions)
-router.get('admin/transaction/:id', getSingleTransaction)
+router.get('transactions', getAllTransactions)
+router.get('transaction/:id', getSingleTransaction)
 
-router.get('/delivery/verify', verifyDeliveryUser)
-router.get('admin/delivery/users', getDeliveryUsers)
+router.get('verify', verifyDeliveryUser)
+router.get('delivery/users', getDeliveryUsers)
 
 

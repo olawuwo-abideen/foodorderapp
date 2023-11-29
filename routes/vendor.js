@@ -19,30 +19,30 @@ const {
 } = require('../controllers/vendorController')
 
 
-router.post('vendor/register', vendorSignup);
+router.post('register', vendorSignup);
 
-router.post('vendor/login', vendorLogin);
+router.post('login', vendorLogin);
 
-router.get('vendor/logout', vendorLogout);
+router.get('logout', vendorLogout);
 
-router.patch('vendor/password', updateVendorPassword);
-
-
-router.patch('vendor/profile', updateVendorProfile);
+router.patch('password', updateVendorPassword);
 
 
-router.post('vendor/food', addFood);
-router.get('vendor/foods', getAllFoods)
+router.patch('profile', updateVendorProfile);
 
 
-router.get('vendor/orders', getAllOrder);
-router.get('vendor/order/:id', getSingleOrder)
+router.post('food', addFood);
+router.get('foods', getAllFoods)
+
+
+router.get('orders', getAllOrder);
+router.get('order/:id', getSingleOrder)
  
 
 //Offers
-router.get('vendor/offers', getAllOffers);
-router.post('vendor/offer', addOffer);
-router.put('vendor/offer/:id', getSingleOffer)
-router.patch('vendoroffer/', editSingleOffer);
+router.get('offers', getAllOffers);
+router.post('offer', addOffer);
+router.put('offer/:id', getSingleOffer)
+router.patch('offer', editSingleOffer);
 
 

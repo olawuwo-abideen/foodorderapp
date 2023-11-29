@@ -20,22 +20,22 @@ const {
 
 
 
-router.post('customer/register', customerSignup)
+router.post('register', customerSignup)
 
-router.post('customer/login', customerLogin)
+router.post('login', customerLogin)
 
-router.get('customer/logout', customerLogout);
+router.get('logout', customerLogout);
 
-router.patch('customer/updatepassword', updateCustomerPassword)
+router.patch('updatepassword', updateCustomerPassword)
 
-router.get('customer/profile', getCustomerProfile)
-router.patch('customer/profile', updateCustomerProfile)
+router.get('profile', getCustomerProfile)
+router.patch('profile', updateCustomerProfile)
 
-router.post('customer/order/delivery', assignOrderForDelivery)
+router.post('order/delivery', assignOrderForDelivery)
 
-router.get('customer/verify/transaction', validateTransaction);
+router.get('verify/transaction', validateTransaction);
 
 
-router.post('customer/create-order', createOrder);
-router.get('customer/orders', getAllOrders);
-router.get('customer/order/:id', getSingleOrder)
+router.post('create-order', createOrder);
+router.get('orders', getAllOrders);
+router.get('order/:id', getSingleOrder)
