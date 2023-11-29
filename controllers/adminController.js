@@ -6,21 +6,8 @@ const CustomError = require('../errors');
 const { attachCookiesToResponse, createVendorToken } = require('../utils');
 
 
-const registerVendor = async (req, res) => {
-  const { email, name, password, } = req.body;
 
-  const emailAlreadyExists = await Vendor.findOne({ email });
-  if (emailAlreadyExists) {
-    throw new CustomError.BadRequestError('Email already exists');
-  }
-
-  const vendor = await Vendor.create({ name, ownerName, email, password, foodType, address, phoneNumber, serviceAvailable, rating, latitude, longitude });
-  const tokenVendor = createVendorToken(vendor);
-  attachCookiesToResponse({ res, vendor: tokenVendor });
-  res.status(StatusCodes.CREATED).json({ vendor: tokenVendor });
-}
   
-
 const  getSingleVendor = async (req, res) => {
     const {id:vendorId} = req.params
     const vendor = await Vendor.findOne({_id:vendorId});
@@ -94,7 +81,6 @@ const getAllVendors = async (req, res) => {
 
 
   module.exports = {
-    registerVendor,
     getSingleVendor,
     getAllVendors,
     getAllTransactions,

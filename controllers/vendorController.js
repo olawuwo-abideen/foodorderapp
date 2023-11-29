@@ -6,7 +6,20 @@ const { StatusCodes } = require('http-status-codes');
 const CustomError = require('../errors');
 
 
-  
+const registerVendor = async (req, res) => {
+  const { email, name, password, } = req.body;
+
+  const emailAlreadyExists = await Vendor.findOne({ email });
+  if (emailAlreadyExists) {
+    throw new CustomError.BadRequestError('Email already exists');
+  }
+
+  const vendor = await Vendor.create({ name, ownerName, email, password, foodType, address, phoneNumber, serviceAvailable, rating, latitude, longitude });
+  const tokenVendor = createVendorToken(vendor);
+  attachCookiesToResponse({ res, vendor: tokenVendor });
+  res.status(StatusCodes.CREATED).json({ vendor: tokenVendor });
+}
+
 const  vendorLogin = async (req, res) => {
 
     const { email, password } = req.body;
