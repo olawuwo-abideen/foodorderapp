@@ -107,7 +107,7 @@ const  editSingleOffer = async (req, res) => {
 
 
 
-const vendorlogout = (req, res) => {
+const vendorLogout = (req, res) => {
     try {
       res.cookie('tokenUser', 'logout', {
         httpOnly: true,
