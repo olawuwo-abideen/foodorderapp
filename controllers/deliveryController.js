@@ -92,9 +92,9 @@ const  updateDeliveryProfile = async (req, res) => {
 
 
 module.exports = {
-    registerDelivery,
-    loginDelivery,
-    logout,
+    deliverySignup,
+    deliveryLogin,
+    deliveryLogout,
     getDeliveryProfile,
     updateDeliveryProfile
 }
