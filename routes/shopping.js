@@ -17,6 +17,6 @@ router.get('/availablefood', getAvailableFood )
 router.get('/top-restaurant/', getTopRestaurants)
 
 
-router.get('/foodoffers/:pincode', getAvailableOffers)
+router.get('/foodoffers/', getAvailableOffers)
 
 router.get('/restaurant/:id', getSingleRestaurant)

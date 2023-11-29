@@ -16,12 +16,12 @@ const {
 
 
 
-router.post('/signup', deliverySignup)
+router.post('delivery/signup', deliverySignup)
 
-router.post('/login',  deliveryLogin)
+router.post('delivery/login',  deliveryLogin)
 
-router.get('/logout', deliveryLogout);
+router.get('delivery/logout', deliveryLogout);
 
 
-router.get('/profile', getDeliveryProfile)
-router.patch('/profile', updateDeliveryProfile)
+router.get('delivery/profile', getDeliveryProfile)
+router.patch('delivery/profile', updateDeliveryProfile)

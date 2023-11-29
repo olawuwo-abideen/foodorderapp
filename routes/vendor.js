@@ -3,18 +3,19 @@ const router = express.Router();
 
 
 const {
+    registerVendor,
     vendorLogin,
-    getVendorProfile,
+    vendorLogout,
+    updateVendorPassword,
     updateVendorProfile,
-    updateVendorService,
-    addSingleFood,
+    addFood,
     getAllFoods,
-    getCurrentOrder,
-    getOrderDetails,
-    processOrder,
+    getAllOrder,
+    getSingleOrder,
     getAllOffers,
-    addSingleOffer,
-    editSingleOffer,
+    getSingleOffer,
+    addOffer,
+    editSingleOffer
 } = require('../controllers/vendorController')
 
 

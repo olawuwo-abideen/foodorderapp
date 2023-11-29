@@ -21,6 +21,7 @@ app.get('/', (req, res) => {
   const adminRouter = require('./routes/admin');
   const customerRouter = require('./routes/customer');
   const deliveryRouter = require('./routes/delivery');
+  const shoppingRouter = require('./routes/shopping');
 
 
 
@@ -29,6 +30,7 @@ app.get('/', (req, res) => {
   app.use('/api/v1/admin', adminRouter);
   app.use('/api/v1/customer', customerRouter);
   app.use('/api/v1/delivery', deliveryRouter);
+  app.use('/api/v1/shopping', shoppingRouter);
 
 
 const port = process.env.PORT || 3000;
