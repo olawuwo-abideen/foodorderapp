@@ -1,14 +1,24 @@
+require('express-async-errors');
 require('dotenv').config();
-
-//Express
 const express = require('express');
+const cookieParser = require('cookie-parser');
 const app = express();
 const cors = require('cors');
+const helmet = require('helmet');
+
+
+
+// middleware
+const notFoundMiddleware = require('./middleware/not-found');
+const errorHandlerMiddleware = require('./middleware/error-handler');
+
 
 //Database
 const connectDB = require('./database/connect');
 app.use(cors());
 app.use(express.json());
+app.use(helmet());
+app.use(cookieParser(process.env.JWT_SECRET));
 
 app.get('/', (req, res) => {
     res.send('<h1>Welcome to God Plan Food </h1>');
@@ -23,7 +33,10 @@ app.get('/', (req, res) => {
   const deliveryRouter = require('./routes/delivery');
   const shoppingRouter = require('./routes/shopping');
   const vendorRouter = require('./routes/vendor');
+  
 
+  app.use(notFoundMiddleware);
+  app.use(errorHandlerMiddleware);
 
 
 
