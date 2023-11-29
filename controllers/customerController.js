@@ -113,10 +113,22 @@ const  updateCustomerProfile = async (req, res) => {
 };
 
 
-
-
 const  assignOrderForDelivery = async (req, res) => {
-  
+  const vendor = await Vendor.findOne(vendorId);
+  if(vendor){
+      const vendorLatitude = vendor.latitude;
+      const vendorLongitude = vendor.longitude;
+      const delivery = await Delivery.find({verified: true, isAvailable: true});
+      if(delivery){
+          const currentOrder = await Order.findOne(orderId);
+          if(currentOrder){
+              currentOrder.deliveryId = delivery[0]._id; 
+              await currentOrder.save();
+          }
+
+      }
+    }
+
 };
 
 const validateTransaction = async (req, res) => {
@@ -124,7 +136,9 @@ const validateTransaction = async (req, res) => {
 };
 
 const  createOrder = async (req, res) => {
-  
+  req.body.user = req.user.userId;
+  const product = await Product.create(req.body);
+  res.status(StatusCodes.CREATED).json({ product });
 };
 
 
