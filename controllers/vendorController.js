@@ -62,6 +62,18 @@ const updateVendorPassword = async (req, res) => {
 };
 
 const  updateVendorProfile = async (req, res) => {
+  const { id: vendorId } = req.params;
+
+  const profile = await Vendor.findOneAndUpdate({ _id: vendorId }, req.body, {
+    new: true,
+    runValidators: true,
+  });
+
+  if (!profile) {
+    throw new CustomError.NotFoundError(`No customer profile with id : ${vendorId}`);
+  }
+
+  res.status(StatusCodes.OK).json({profile});
     
 };
 
