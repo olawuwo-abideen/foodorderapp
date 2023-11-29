@@ -25,4 +25,4 @@ router.get('transaction/:id', getSingleTransaction)
 router.get('verify', verifyDeliveryUser)
 router.get('delivery/users', getDeliveryUsers)
 
-
+module.exports = router;

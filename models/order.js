@@ -15,7 +15,7 @@ const orderSchema = new mongoose.Schema(
         },
         items: [
           {
-              food: {type: Schema.Types.ObjectId, ref: "food", require: true},
+              food: {type: mongoose.Schema.ObjectId, ref: "food", require: true},
               unit: { type: Number, require: true}
           }
       ],
@@ -48,7 +48,6 @@ const orderSchema = new mongoose.Schema(
             type: Number,
             required: true,
           },
-          timestamps: true
       },
 )
 

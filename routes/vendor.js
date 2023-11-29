@@ -54,3 +54,6 @@ router.put('offer/:id', getSingleOffer)
 router.patch('offer', editSingleOffer);
 
 
+
+module.exports = router;
+

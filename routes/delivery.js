@@ -31,3 +31,10 @@ router.get('logout', deliveryLogout);
 
 router.get('profile', getDeliveryProfile)
 router.patch('profile', updateDeliveryProfile)
+
+
+
+
+
+
+module.exports = router;

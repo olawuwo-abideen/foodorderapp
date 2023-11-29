@@ -20,3 +20,10 @@ router.get('top-restaurant/', getTopRestaurants)
 router.get('foodoffers/', getAvailableOffers)
 
 router.get('restaurant/:id', getSingleRestaurant)
+
+
+
+
+
+
+module.exports = router;

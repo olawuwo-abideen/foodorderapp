@@ -45,3 +45,9 @@ router.get('verify/transaction', validateTransaction);
 router.post('create-order', createOrder);
 router.get('orders', getAllOrders);
 router.get('order/:id', getSingleOrder)
+
+
+
+
+
+module.exports = router;

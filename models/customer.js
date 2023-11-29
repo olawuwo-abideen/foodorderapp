@@ -49,16 +49,14 @@ const customerSchema = new mongoose.Schema(
           },
           cart: [
             {
-                food: { type: Schema.Types.ObjectId, ref: 'food', require: true},
+                food: { type: mongoose.Schema.ObjectId, ref: 'food', require: true},
                 unit: { type: Number, require: true}
             }
         ],
         orders: [{
-            type: Schema.Types.ObjectId,
+            type: mongoose.Schema.ObjectId,
             ref: 'order'
         }],
-        
-        timestamps: true
         
       },
 )
