@@ -114,6 +114,7 @@ const  updateCustomerProfile = async (req, res) => {
 
 
 const  assignOrderForDelivery = async (req, res) => {
+
   const vendor = await Vendor.findOne(vendorId);
   if(vendor){
       const vendorLatitude = vendor.latitude;
@@ -132,6 +133,15 @@ const  assignOrderForDelivery = async (req, res) => {
 };
 
 const validateTransaction = async (req, res) => {
+
+  const currentTransaction = await Transaction.findOne(txnId);
+
+    if(currentTransaction){
+        if(currentTransaction.status.toLowerCase() !== 'failed'){
+            return {status: true, currentTransaction};
+        }
+    }
+    return {status: false, currentTransaction};
     
 };
 
@@ -156,7 +166,8 @@ const getSingleOrder = async (req, res) => {
 
 
 const  getAllOrders = async (req, res) => {
-  
+  const orders = await Order.find({});
+  res.status(StatusCodes.OK).json({ orders });
 };
 
 
