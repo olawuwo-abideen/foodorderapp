@@ -4,7 +4,7 @@ const CustomError = require('../errors');
 const { attachCookiesToResponse, createDeliveryToken } = require('../utils');
 
  
-const  registerDelivery = async (req, res) => {
+const  deliverySignup = async (req, res) => {
 
 const  { name, email, password } = req.body;
 
@@ -21,7 +21,7 @@ const emailAlreadyExists = await Delivery.findOne({ email });
 };
 
 
-const  loginDelivery = async (req, res) => {
+const  deliveryLogin = async (req, res) => {
     const { email, password } = req.body;
 
     if (!email || !password) {
@@ -43,7 +43,7 @@ const  loginDelivery = async (req, res) => {
 };
 
 
-const logout = (req, res) => {
+const deliveryLogout = (req, res) => {
     try {
       res.cookie('tokenDelivery', 'logout', {
         httpOnly: true,
@@ -59,13 +59,13 @@ const logout = (req, res) => {
 const  getDeliveryProfile = async (req, res) => {
   const {id: deliveryId} = req.params;
 
-  const delivery = await Delivery.findOne({_id: deliveryId})
+  const deliveryprofile = await Delivery.findOne({_id: deliveryId})
 
-  if (!delivery) {
-    throw new CustomError.NotFoundError(`No delivery with id : ${deliveryId}`);
+  if (!deliveryprofile) {
+    throw new CustomError.NotFoundError(`No delivery Profile with id : ${deliveryId}`);
   }
 
-  res.status(StatusCodes.OK).json({delivery});
+  res.status(StatusCodes.OK).json({deliveryprofile});
     
 };
 
@@ -75,16 +75,16 @@ const  updateDeliveryProfile = async (req, res) => {
 
   const { id: deliveryId } = req.params;
 
-  const delivery = await Delivery.findOneAndUpdate({ _id: deliveryId }, req.body, {
+  const updatedelivery = await Delivery.findOneAndUpdate({ _id: deliveryId }, req.body, {
     new: true,
     runValidators: true,
   });
 
-  if (!delivery) {
-    throw new CustomError.NotFoundError(`No product with id : ${deliveryId}`);
+  if (!updatedelivery) {
+    throw new CustomError.NotFoundError(`No delivery Profile with id : ${deliveryId}`);
   }
 
-  res.status(StatusCodes.OK).json({delivery});
+  res.status(StatusCodes.OK).json({updatedelivery});
     
 };
 
