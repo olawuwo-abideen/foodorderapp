@@ -3,26 +3,26 @@ const router = express.Router();
 
 
 const {
-    registerVendor,
     getSingleVendor,
     getAllVendors,
     getAllTransactions,
     getSingleTransaction,
     verifyDeliveryUser,
-    getDeliveryUsers 
+    getDeliveryUsers
 
-    } = require('../controllers/admin');
-
-
-
-router.post('/vendor', registerVendor)
-
-router.get('/vendors', getAllVendors)
-router.get('/vendor/:id', getSingleVendor)
+    } = require('../controllers/adminController');
 
 
-router.get('/transactions', getAllTransactions)
-router.get('/transaction/:id', getSingleTransaction)
 
-router.put('/delivery/verify', verifyDeliveryUser)
-router.get('/delivery/users', getDeliveryUsers)
+
+router.get('admin/vendors', getAllVendors)
+router.get('admin/vendor/:id', getSingleVendor)
+
+
+router.get('admin/transactions', getAllTransactions)
+router.get('admin/transaction/:id', getSingleTransaction)
+
+router.get('/delivery/verify', verifyDeliveryUser)
+router.get('admin/delivery/users', getDeliveryUsers)
+
+

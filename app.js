@@ -18,14 +18,13 @@ app.get('/', (req, res) => {
 
 
 
-
-  const shoppingRouter = require('./routes/shopping');
-
+  const adminRouter = require('./routes/admin');
 
 
 
 
-  app.use('/api/v1/shopping', shoppingRouter);
+
+  app.use('/api/v1/admin', adminRouter);
 
 
 const port = process.env.PORT || 3000;
