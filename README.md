@@ -82,7 +82,7 @@ to start using the app.
 
 The following API endpoints are available:
 
-- BaseUrl https://localhost:3000/
+BaseUrl https://localhost:3000/
 
 - `GET /api/v1/admin/vendors` - Get all Vendors
 - `GET /api/v1/admin/vendors/:id` - Get a Vendors
