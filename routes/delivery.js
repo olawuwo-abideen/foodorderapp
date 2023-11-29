@@ -3,11 +3,11 @@ const router = express.Router();
 
 
 const {
-    registerDelivery,
-    loginDelivery,
+    deliverySignup,
+    deliveryLogin,
+    deliveryLogout,
     getDeliveryProfile,
-    updateDeliveryProfile,
-    updateDeliveryStatus
+    updateDeliveryProfile
 } = require('../controllers/deliveryController')
 
 
@@ -16,11 +16,12 @@ const {
 
 
 
-router.post('/signup', registerDelivery)
+router.post('/signup', deliverySignup)
 
-router.post('/login',  loginDelivery)
+router.post('/login',  deliveryLogin)
 
-router.put('/change-status', updateDeliveryStatus);
+router.get('/logout', deliveryLogout);
+
 
 router.get('/profile', getDeliveryProfile)
 router.patch('/profile', updateDeliveryProfile)
