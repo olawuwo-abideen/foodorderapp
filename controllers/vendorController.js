@@ -28,27 +28,37 @@ const  vendorLogin = async (req, res) => {
     if (!email || !password) {
       throw new CustomError.BadRequestError('Please provide email and password');
     }
-    const customer = await Customer.findOne({ email });
+    const vendor = await Vendor.findOne({ email });
   
-    if (!customer) {
+    if (!vendor) {
       throw new CustomError.UnauthenticatedError('Invalid Credentials');
     }
-    const isPasswordCorrect = await customer.comparePassword(password);
+    const isPasswordCorrect = await vendor.comparePassword(password);
     if (!isPasswordCorrect) {
       throw new CustomError.UnauthenticatedError('Invalid Credentials');
     }
-    const tokenCustomer = createCustomerToken(user);
-    attachCookiesToResponse({ res, customer: tokenCustomer });
+    const tokenVendor = createVendorToken(vendor);
+    attachCookiesToResponse({ res, vendor: tokenVendor });
   
-    res.status(StatusCodes.OK).json({ customer: tokenCustomer });
-
-    
+    res.status(StatusCodes.OK).json({ vendor: tokenVendor });
     
 };
 
+const updateVendorPassword = async (req, res) => {
+  const { oldPassword, newPassword } = req.body;
+  if (!oldPassword || !newPassword) {
+    throw new CustomError.BadRequestError('Please provide both values');
+  }
+  const vendor = await Vendor.findOne({ _id: req.user.userId });
 
-const  getVendorProfile = async (req, res) => {
-    
+  const isPasswordCorrect = await vendor.comparePassword(oldPassword);
+  if (!isPasswordCorrect) {
+    throw new CustomError.UnauthenticatedError('Invalid Credentials');
+  }
+  vendor.password = newPassword;
+
+  await vendor.save();
+  res.status(StatusCodes.OK).json({ msg: 'Success! Password Updated.' });
 };
 
 const  updateVendorProfile = async (req, res) => {
@@ -145,10 +155,10 @@ const vendorLogout = (req, res) => {
 
 
 module.exports = {
-
+   registerVendor,
     vendorLogin,
     vendorLogout,
-    getVendorProfile,
+    updateVendorPassword,
     updateVendorProfile,
     updateVendorService,
     addSingleFood,

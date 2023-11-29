@@ -4,9 +4,6 @@ const Vendor = require('../models/vendor')
 const { StatusCodes } = require('http-status-codes');
 const CustomError = require('../errors');
 
-
-
-
   
 const  getSingleVendor = async (req, res) => {
     const {id:vendorId} = req.params
