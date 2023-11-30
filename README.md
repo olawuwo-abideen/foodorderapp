@@ -1,6 +1,6 @@
 # FoodOrdering
 
-The food ordering app is designed to offer a seamless  experience for both vendor and customers. With a focus on efficient design, robust product management, and secure transactions, the app enables vendor to showcase their foods to customers. Key features include a secure user authentication system, comprehensive product management tools, a convenient shopping cart, and a streamlined order processing system. The app integrates a secure payment gateway to facilitate online transactions, supports customer rating for informed decision-making, and incorporates search and filtering options for a personalized shopping experience. Additionally, the app prioritizes security, scalability, and legal compliance, while analytics tools provide valuable insights. With thorough testing, documentation, and ongoing customer support integration, the food ordering app aims to enhance the overall online food shopping experience.
+The food ordering app is designed to offer a seamless experience for both vendor and customers. With a focus on efficient design, robust product management, and secure transactions, the app enables vendor to showcase their foods to customers. Key features include a secure user authentication system, comprehensive product management tools, a convenient shopping cart, and a streamlined order processing system. The app integrates a secure payment gateway to facilitate online transactions, supports customer rating for informed decision-making, and incorporates search and filtering options for a personalized shopping experience. Additionally, the app prioritizes security, scalability, and legal compliance, while analytics tools provide valuable insights. With thorough testing, documentation, and ongoing customer support integration, the food ordering app aims to enhance the overall online food shopping experience.
 
 ## Features
 
@@ -35,7 +35,7 @@ The food ordering app is designed to offer a seamless  experience for both vendo
 - clone the repository
 
 ```sh
-git clone git@github.com:olawuwo-abideen/foodorderapp.git
+git clone git@github.com:olawuwo-abideen/foodorderingapp.git
 ```
 
 - navigate to the folder
@@ -132,7 +132,7 @@ BaseUrl https://localhost:3000/
 
 Contributions, issues, and feature requests are welcome!
 
-Feel free to check the [issues page](https://github.com/olawuwo-abideen/foodorderapp/issues).
+Feel free to check the [issues page](https://github.com/olawuwo-abideen/foodorderingapp/issues).
 
 ## Authors
 
